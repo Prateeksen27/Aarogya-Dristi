@@ -1,10 +1,11 @@
-from flask import Flask, request, render_template, redirect, url_for,flash,session
+from flask import Flask, request, render_template, redirect, url_for,flash,session,jsonify
 # import json
 import numpy as np
 import pandas as pd
 import pickle
 import psycopg2
 from flask_mail import Mail, Message
+from flask_cors import CORS
 app = Flask(__name__)
 app.secret_key = 'a_random_and_complex_string_here'
 
@@ -471,7 +472,6 @@ def book_appointment():
     full_name = request.form['fullName']  # Patient's full name (from the form)
     appointment_date = request.form['appointmentDate']  # Appointment date (from the form)
     reason = request.form['reason']  # Reason for the appointment (from the form)
-    email = request.form['email']  # Patient's email (from the form)
     status ="Pending" # Default status ("Pending" from the form)
 
     # Assuming doctor_email is passed through the URL query string
@@ -482,6 +482,7 @@ def book_appointment():
         # Database connection
         conn = get_db_connection()
         cur = conn.cursor()
+        email = session['user']['email']
 
         # Insert data into the appointment table
         query = """
@@ -495,7 +496,7 @@ def book_appointment():
         
         # Success message
         flash('Appointment successfully booked!', 'success')
-        return redirect(url_for('bookAppointment'))  # Redirect after successful booking
+        return redirect(url_for('myAppointments'))  # Redirect after successful booking
         
     except Exception as e:
         # If an error occurs
@@ -574,6 +575,112 @@ def myAppointments():
             cur.close()
         if 'conn' in locals():
             conn.close()
+
+def sendMailMeet(email,link,user_name):
+    # Creating the email message
+    msg = Message(subject="The Doctor Is live Now",
+                  sender='ashishmohapatrapopun@gmail.com',
+                  recipients=[email])
+    
+    # HTML content for the email
+    email_content = f"""
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Appointment is Live</title>
+    <style>
+        body {{
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f4f4f4;
+            color: #333;
+        }}
+        .container {{
+            max-width: 800px;
+            margin: 0 auto;
+            background: #ffffff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }}
+        .header {{
+            text-align: center;
+            padding-bottom: 20px;
+            border-bottom: 2px solid #007bff;
+        }}
+        h1 {{
+            color: #007bff;
+            font-weight: 600;
+        }}
+        .content {{
+            margin-top: 20px;
+            font-size: 1.1em;
+        }}
+        .appointment-details {{
+            background-color: #e8f4ff;
+            padding: 20px;
+            border-radius: 6px;
+            margin-top: 20px;
+            border-left: 5px solid #007bff;
+        }}
+        .appointment-details p {{
+            margin: 5px 0;
+        }}
+        .footer {{
+            text-align: center;
+            font-size: 0.9em;
+            color: #666;
+            margin-top: 30px;
+            padding-top: 10px;
+            border-top: 1px solid #e0e0e0;
+        }}
+        .button {{
+            display: inline-block;
+            background-color: #007bff;
+            color: #fff;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 5px;
+            margin-top: 20px;
+        }}
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="header">
+        <h1>Your Appointment is Live Now</h1>
+    </div>
+
+    <div class="content">
+        <p>Dear {user_name},</p>
+        <p>We are pleased to inform you that the doctor is now live and ready for your consultation. You can join the meeting using the link below:</p>
+
+        <div class="appointment-details">
+            <h2>Meeting Details</h2>
+            <p><strong>Join the Meeting:</strong> <a href="{link}" target="_blank" class="button">Click here to join</a></p>
+        </div>
+
+        <p>If you have any issues joining the meeting or need further assistance, please contact us through our support page.</p>
+
+        <a href="https://yourwebsite.com/contact" class="button">Contact Us</a>
+    </div>
+
+    <div class="footer">
+        <p>This is an automated email. Please do not reply directly to this message.</p>
+        <p>If you need further assistance, please visit our <a href="https://yourwebsite.com">website</a>.</p>
+    </div>
+</div>
+
+</body>
+</html>
+"""
+
+# Set the email HTML content and send the email
+    msg.html = email_content
+    mail.send(msg)
 
 def sendMail(email, user_name, date, time):
     # Creating the email message
@@ -774,6 +881,37 @@ def reject_appointment(appointment_id):
         conn.close()
 
     return redirect(url_for('showAppointment'))
+@app.route('/startMeet/<int:appointment_id>', methods=['POST'])
+def startMeet(appointment_id):
+    try:
+        conn = get_db_connection()
+        cur = conn.cursor()
+
+        # Fetch the appointment using the appointment_id
+        cur.execute('SELECT * FROM appointment WHERE appointment_id = %s', (appointment_id,))
+        appointment = cur.fetchone()
+
+        if appointment:
+            # Assuming 'room_id' is in the 7th column (index 6) in your appointment table
+            room_id = appointment[0]  # Adjust the index based on your actual table schema
+
+            # Construct the meeting URL using the room_id from the appointment
+            meeting_url = f'http://localhost:3000/room?roomId={room_id}'
+
+            # Redirect to the React app's meeting room URL
+            sendMailMeet(appointment[1],meeting_url,appointment[6])
+            return redirect(meeting_url)
+        else:
+            print("Appointment not found")
+            return redirect(url_for('showAppointment'))  # Adjust as necessary for handling no appointment
+
+    except Exception as e:
+        print(f"Error occurred while starting the meeting: {e}")
+        return redirect(url_for('showAppointment'))  # Adjust as necessary for error handling
+
+    finally:
+        cur.close()
+        conn.close()
 
 
 

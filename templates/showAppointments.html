@@ -193,7 +193,10 @@
 
 
                                     {% elif appointment[4] == 'Accepted' %}
-                                    <span class="status-accepted">Accepted</span>
+                                    <form action="/startMeet/{{ appointment[0] }}" method="post"
+                                        style="display:inline;">
+                                        <button type="submit" class="btn-accept">Start meet</button>
+                                    </form>
                                     {% elif appointment[4] == 'Rejected' %}
                                     <span class="status-rejected">Rejected</span>
                                     {% else %}
