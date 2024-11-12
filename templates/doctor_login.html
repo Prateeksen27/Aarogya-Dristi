@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Doctor Login</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/doctor.css') }}" />
+</head>
+
+<body>
+
+    <div class="container">
+        <div class="left-side"></div>
+        <div class="right-side">
+            <form id="loginForm" action="/dLogin" method="post">
+                <h2>Doctor Login</h2>
+                <div class="input-group">
+                    <label for="doctorEmail">Email</label>
+                    <input type="email" id="doctorEmail" name="username" autofocus required />
+                </div>
+                <div class="input-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" name="password" required />
+                </div>
+                {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                <div class="alert alert-danger">
+                    {% for category, message in messages %}
+                    {{ message }}
+                    {% endfor %}
+                </div>
+                {% endif %}
+                {% endwith %}
+                <button type="submit">Login</button>
+                <a href="/dregister" class="register-link">Don't have an account? Register here</a>
+                <div id="message"></div>
+            </form>
+        </div>
+    </div>
+</body>
+
+</html>

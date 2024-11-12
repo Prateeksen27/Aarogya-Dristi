@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>About - Health Care Center</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous" />
+  <style>
+    .logo {
+      width: 50px;
+      height: 50px;
+      color: black;
+      margin-top: 0;
+      margin-left: 2px;
+    }
+
+    .myimg {
+      width: 50px;
+      height: 50px;
+      border: 2px solid black;
+      border-radius: 25px;
+    }
+
+    .about-section {
+      margin-top: 20px;
+      background: #f8f9fa;
+      border-radius: 10px;
+      padding: 20px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .about-section h2 {
+      font-size: 1.5rem;
+      color: #333;
+      border-bottom: 2px solid #007bff;
+      padding-bottom: 10px;
+      margin-bottom: 20px;
+    }
+
+    .about-section p {
+      font-size: 1rem;
+      color: #555;
+      margin-bottom: 15px;
+    }
+
+    .about-section ul {
+      font-size: 1rem;
+      color: #555;
+      list-style-type: square;
+      padding-left: 20px;
+    }
+
+    .about-section ul li {
+      margin-bottom: 5px;
+    }
+  </style>
+</head>
+
+<body>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container-fluid">
+      <div class="logo">
+        <img class="myimg" src="{{ url_for('static', filename='img.png') }}" alt="" />
+      </div>
+
+      <a class="navbar-brand" href="#">Health Center</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link" href="/predict">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="/about">About</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container">
+    <div class="about-section">
+      <h2>About Our Disease Detection Model</h2>
+      <p>
+        Our disease detection model is designed to help individuals quickly
+        and accurately assess their health conditions based on various
+        symptoms and data inputs. Utilizing advanced algorithms and machine
+        learning techniques, our model provides reliable results to aid in
+        early diagnosis and treatment planning.
+      </p>
+      <p>Key features of the model include:</p>
+      <ul>
+        <li>Real-time disease detection based on symptom input.</li>
+        <li>
+          Integration with medical databases for up-to-date information.
+        </li>
+        <li>User-friendly interface for easy navigation and usage.</li>
+        <li>Secure data handling and privacy protection.</li>
+      </ul>
+      <p>
+        Our goal is to empower users with the information they need to take
+        proactive steps in managing their health. The model is continuously
+        updated to improve accuracy and incorporate the latest medical
+        research.
+      </p>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
+    integrity="sha384-oBqDVmMz4fnFOkP6CkOrO7W3DfpxtP0lZ6p6LxI6sXnI5G5ErXxUlO+m7DMM0wV" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.min.js"
+    integrity="sha384-9o4yZw6ZOG5VANl7V0f0zX3T+P7TSi0ksYkS2IU9XGxL6RX1nI1xXYgKh9xYVsZP"
+    crossorigin="anonymous"></script>
+</body>
+
+</html>

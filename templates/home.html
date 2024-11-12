@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Disease Detection & Medicine Recommendation</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/styles.css') }}" />
+</head>
+
+<body>
+    <!-- Navbar -->
+    <header class="navbar">
+        <div class="container">
+            <h1 class="logo">HealthCare Plus</h1>
+            <nav>
+                <div class="auth-buttons">
+                    <!-- Login Dropdown -->
+                    <div class="dropdown">
+                        <button class="btn btn-login">Login</button>
+                        <div class="dropdown-content">
+                            <a href="/login">Patient Login</a>
+                            <a href="/dLogin">Doctor Login</a>
+                        </div>
+                    </div>
+                    <!-- Register Dropdown -->
+                    <div class="dropdown">
+                        <button class="btn btn-register">Register</button>
+                        <div class="dropdown-content">
+                            <a href="/register">Patient Register</a>
+                            <a href="/dregister">Doctor Register</a>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+            <ul class="nav-links">
+                <li><a href="#about">About Us</a></li>
+                <li><a href="#features">Features</a></li>
+                <li><a href="#testimonials">Testimonials</a></li>
+                <li><a href="/contact">Contact</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <!-- Hero Content on the Left -->
+            <div class="hero-content">
+                <h2>Your Health, Our Priority</h2>
+                <p>
+                    Experience advanced disease detection and personalized medicine recommendations. Stay informed about
+                    your health with cutting-edge AI technology.
+                </p>
+                <a href="/login" class="btn btn-primary">Get Started</a>
+            </div>
+
+            <!-- Hero Image on the Right -->
+            <div class="hero-image">
+                <img src="https://images.pexels.com/photos/4386467/pexels-photo-4386467.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+                    alt="AI in Healthcare" height="450px" width="me-auto" />
+            </div>
+
+        </div>
+    </section>
+
+    <!-- About Us Section -->
+    <section id="about" class="about">
+        <div class="container">
+            <h2>About HealthCare Plus</h2>
+            <p>
+                HealthCare Plus provides AI-driven solutions for disease detection and personalized medicine
+                recommendations. Our platform helps patients receive accurate diagnoses and tailored treatments from
+                expert doctors.
+            </p>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="features">
+        <div class="container">
+            <h2>Our Features</h2>
+            <div class="feature-cards">
+                <div class="feature-card">
+                    <img src="https://images.pexels.com/photos/4101143/pexels-photo-4101143.jpeg?auto=compress&cs=tinysrgb&w=600"
+                        alt="AI Diagnosis" />
+                    <h3>AI-Powered Diagnosis</h3>
+                    <p>
+                        Get a quick and accurate disease diagnosis using our AI-based system, helping you understand
+                        your health better.
+                    </p>
+                </div>
+                <div class="feature-card">
+                    <img src="https://images.pexels.com/photos/1107075/pexels-photo-1107075.jpeg?auto=compress&cs=tinysrgb&w=600"
+                        alt="Personalized Treatment" />
+                    <h3>Personalized Medicine</h3>
+                    <p>
+                        Receive tailored medication recommendations based on your specific health needs and diagnosis.
+                    </p>
+                </div>
+                <div class="feature-card">
+                    <img src="https://images.pexels.com/photos/3183197/pexels-photo-3183197.jpeg?auto=compress&cs=tinysrgb&w=600"
+                        alt="Doctor Consultation" />
+                    <h3>Expert Consultation</h3>
+                    <p>
+                        Consult with certified doctors to confirm your diagnosis and receive the best medical advice.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section id="testimonials" class="testimonials">
+        <div class="container">
+            <h2>What Our Users Say</h2>
+            <div class="testimonial-cards">
+                <div class="testimonial-card">
+                    <p>
+                        "HealthCare Plus provided me with a fast and accurate diagnosis. The medicine recommendations
+                        were spot on, and I felt better within days."
+                    </p>
+                    <h4>Sarah Lee, User</h4>
+                </div>
+                <div class="testimonial-card">
+                    <p>
+                        "The AI system is incredible. It saved me from the hassle of visiting multiple doctors for a
+                        second opinion. Highly recommended!"
+                    </p>
+                    <h4>David Wong, User</h4>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Call to Action Section -->
+    <section class="cta">
+        <div class="container">
+            <h2>Take Charge of Your Health Today</h2>
+            <p>Sign up now to start your journey toward better health.</p>
+            <a href="register.html" class="btn btn-primary">Join Now</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <p>&copy; 2024 HealthCare Plus. All rights reserved.</p>
+                <ul class="footer-links">
+                    <li><a href="#">Privacy Policy</a></li>
+                    <li><a href="#">Terms of Service</a></li>
+                </ul>
+            </div>
+        </div>
+    </footer>
+</body>
+
+</html>
