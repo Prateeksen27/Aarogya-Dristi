@@ -12,7 +12,8 @@ create table doctor(
     qualification text,
     exp text,
     workingat text,
-    consultationhours text
+    consultationhours text,
+    password text
 );
 
 CREATE TABLE appointment (
